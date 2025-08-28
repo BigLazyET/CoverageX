@@ -1,0 +1,2 @@
+# CoverageX
+.NET Coverage
