@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CoverageIncr.Exporters\CoverageIncr.Exporters.csproj" />
+      <ProjectReference Include="..\CoverageIncr.Processors\CoverageIncr.Processors.csproj" />
+      <ProjectReference Include="..\CoverageIncr.Receivers\CoverageIncr.Receivers.csproj" />
+    </ItemGroup>
+
 </Project>
