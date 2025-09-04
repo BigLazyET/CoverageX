@@ -2,12 +2,7 @@ using CoverageIncr.Shared;
 
 namespace CoverageIncr.Receivers;
 
-public interface IReceiver : IComponentLifecycle
+public interface IReceiver<TIn, TOut> : IComponentLifecycle
 {
-    
-}
-
-public interface IReceiver<TOut> : IReceiver
-{
-    Task<PipelineContext<TOut>> ReceiveAsync(object ctx);
+    Task<PipelineContext<TOut>> ReceiveAsync();
 }
