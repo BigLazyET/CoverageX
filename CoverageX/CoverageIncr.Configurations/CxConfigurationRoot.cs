@@ -1,4 +1,6 @@
 using CoverageIncr.Configurations.Interfaces;
+using CoverageIncr.Shared;
+using CoverageIncr.Shared.Pipelines;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 
@@ -25,15 +27,27 @@ public class CxConfigurationRoot : ICxConfiguration, IDisposable
         }
     }
 
-    public object? GetReceiver(string receiverName, Type returnType)
+    public object? GetPipelineComponent(string componentName, ComponentType componentType, Type optionType)
     {
         for (var i = _providers.Count() - 1; i >= 0; --i)
         {
             var provider = _providers.ElementAt(i);
-             return provider.GetReceiver(receiverName, returnType);
+             return provider.GetReceiver(componentName, componentType, optionType);
         }
 
         return default;
+    }
+
+    public IDictionary<string, PipelineScope> GetPipelines()
+    {
+        for (var i = _providers.Count() - 1; i >= 0; --i)
+        {
+            var provider = _providers.ElementAt(i);
+            var pipelines = provider.GetPipelines();
+            if (pipelines.Count == 0) continue;
+            return pipelines;
+        }
+        return new Dictionary<string, PipelineScope>();
     }
     
     private void RaiseChanged()

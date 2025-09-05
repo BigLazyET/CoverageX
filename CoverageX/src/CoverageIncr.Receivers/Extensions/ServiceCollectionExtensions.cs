@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
 
         foreach (var type in types)
         {
-            ComponentsGallery.RegisterReceiver(type.attr.Name, type.implType, type.attr.OptionType);
+            ComponentsGallery.RegisterReceiver(type.attr.Name, type.implType, type.attr.OptionType, type.attr.OutType);
         }
         
         return services;

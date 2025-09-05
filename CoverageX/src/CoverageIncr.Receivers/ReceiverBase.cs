@@ -2,7 +2,7 @@ using CoverageIncr.Shared;
 
 namespace CoverageIncr.Receivers;
 
-public abstract class ReceiverBase<TIn, TOut> : IReceiver<TIn, TOut>
+public abstract class ReceiverBase<TIn, TOut> : IReceiver<TOut>
 {
     protected TIn _option;
 

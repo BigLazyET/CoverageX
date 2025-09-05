@@ -7,7 +7,7 @@ using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
 namespace CoverageIncr.Receivers;
 
-[Receiver(Name = "globbing", OptionType = typeof(GlobbingOption))]
+[Receiver(Name = "globbing", OptionType = typeof(GlobbingOption), OutType = typeof(IEnumerable<string>))]
 public class GlobbingReceiver : ReceiverBase<GlobbingOption, IEnumerable<string>>
 {
     public GlobbingReceiver(GlobbingOption option) : base(option)

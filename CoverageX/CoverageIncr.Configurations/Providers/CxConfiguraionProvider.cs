@@ -1,4 +1,6 @@
 using CoverageIncr.Configurations.Interfaces;
+using CoverageIncr.Shared;
+using CoverageIncr.Shared.Pipelines;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 
@@ -11,7 +13,9 @@ public abstract class CxConfiguraionProvider : ICxConfigurationProvider, IDispos
     
     public IChangeToken GetReloadToken() => _reloadToken;
 
-    public abstract object? GetReceiver(string receiverName, Type returnType);
+    public abstract object? GetReceiver(string componentName, ComponentType componentType, Type optionType);
+    
+    public IDictionary<string, PipelineScope> GetPipelines() => Data.Pipelines;
 
     public abstract void Load();
 

@@ -1,4 +1,5 @@
 using CoverageIncr.Configurations.Sources;
+using CoverageIncr.Shared;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -42,10 +43,20 @@ public class YamlCxConfigurationProvider : CxConfiguraionProvider
         return deserializer.Deserialize<CxTakenConfiguration>(yaml);
     }
 
-    public override object? GetReceiver(string receiverName, Type returnType)
+    public override object? GetReceiver(string componentName, ComponentType componentType, Type optionType)
     {
-        if (!Data.Receivers.TryGetValue(receiverName, out var ymlSection))
-            return default;
-        return YamlDynamicBinder.Bind(ymlSection, returnType);
+        return componentType switch
+        {
+            ComponentType.Receiver => !Data.Receivers.TryGetValue(componentName, out var receiverYmlSection)
+                ? null
+                : YamlDynamicBinder.Bind(receiverYmlSection, optionType),
+            ComponentType.Processor => !Data.Processors.TryGetValue(componentName, out var processorYmlSection)
+                ? null
+                : YamlDynamicBinder.Bind(processorYmlSection, optionType),
+            ComponentType.Exporter => !Data.Exporters.TryGetValue(componentName, out var exporterYmlSection)
+                ? null
+                : YamlDynamicBinder.Bind(exporterYmlSection, optionType),
+            _ => throw new ArgumentOutOfRangeException(nameof(componentType), componentType, null)
+        };
     }
 }

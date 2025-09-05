@@ -4,7 +4,7 @@ using CoverageIncr.Shared.Attributes;
 
 namespace CoverageIncr.Receivers;
 
-[Receiver(Name = "file", OptionType = typeof(string))]
+[Receiver(Name = "file", OptionType = typeof(string), OutType = typeof(IEnumerable<string>))]
 public class FileReceiver : ReceiverBase<string, IEnumerable<string>>
 {
     public FileReceiver(string option) : base(option)
