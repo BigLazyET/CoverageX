@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\CoverageIncr.Shared\CoverageIncr.Shared.csproj" />
+      <ProjectReference Include="..\CoverageIncr.Shared\CoverageIncr.Shared.csproj" />
     </ItemGroup>
 
 </Project>

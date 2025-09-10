@@ -4,4 +4,6 @@ namespace CoverageIncr.Shared.Attributes;
 public class ProcessorAttribute : Attribute
 {
     public string Name { get; set; }
+    
+    public Type OptionType { get; set; }
 }

@@ -10,4 +10,9 @@
       <ProjectReference Include="..\CoverageIncr.Shared\CoverageIncr.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="LibGit2Sharp" Version="0.31.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    </ItemGroup>
+
 </Project>

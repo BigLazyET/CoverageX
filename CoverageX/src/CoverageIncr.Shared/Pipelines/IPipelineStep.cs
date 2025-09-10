@@ -7,5 +7,5 @@ public interface IPipelineStep : IComponentLifecycle
     /// </summary>
     /// <param name="ctx"></param>
     /// <returns></returns>
-    Task<object> ExecuteAsync(object ctx);
+    Task<PipelineContext> ExecuteAsync(PipelineContext ctx);
 }

@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\CoverageIncr.Configurations\CoverageIncr.Configurations.csproj" />
+      <ProjectReference Include="..\CoverageIncr.Configurations\CoverageIncr.Configurations.csproj" />
       <ProjectReference Include="..\CoverageIncr.Pipelines\CoverageIncr.Pipelines.csproj" />
     </ItemGroup>
 

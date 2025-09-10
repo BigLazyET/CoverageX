@@ -7,10 +7,5 @@ public class ExporterAttribute : Attribute
     
     public Type OptionType { get; set; }
     
-
-    public ExporterAttribute(string name, Type optionType)
-    {
-        Name = name;
-        OptionType = optionType;
-    }
+    public Type InType { get; set; }
 }

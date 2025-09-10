@@ -2,20 +2,15 @@ using CoverageIncr.Shared;
 
 namespace CoverageIncr.Exporters;
 
-public class ExporterStep<TIn> : IPipelineStep
+public class ExporterStep(IExporter exporter) : IPipelineStep
 {
-    private readonly IExporter<TIn> _exporter;
+    public Task StartAsync() => exporter.StartAsync();
 
-    public ExporterStep(IExporter<TIn> exporter) => _exporter = exporter;
+    public Task StopAsync() => exporter.StopAsync();
     
-    public Task StartAsync() => _exporter.StartAsync();
-
-    public Task StopAsync() => _exporter.StopAsync();
-
-    public async Task<object> ExecuteAsync(object ctx)
+    public async Task<PipelineContext> ExecuteAsync(PipelineContext ctx)
     {
-        var typedCtx = ctx as PipelineContext<TIn>;
-        await _exporter.ReceiveAsync(typedCtx);
-        return null;
+        var result = await exporter.ExportAsync(ctx);
+        return result;
     }
 }

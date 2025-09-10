@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using CoverageIncr.Receivers.Options;
 using CoverageIncr.Shared;
 using CoverageIncr.Shared.Attributes;
@@ -7,17 +6,13 @@ using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
 namespace CoverageIncr.Receivers;
 
-[Receiver(Name = "globbing", OptionType = typeof(GlobbingOption), OutType = typeof(IEnumerable<string>))]
-public class GlobbingReceiver : ReceiverBase<GlobbingOption, IEnumerable<string>>
+[Receiver(Name = "globbing", OptionType = typeof(GlobbingOption), InType = typeof(string))]
+public class GlobbingReceiver(GlobbingOption option) : ReceiverBase<GlobbingOption>(option)
 {
-    public GlobbingReceiver(GlobbingOption option) : base(option)
-    {
-    }
-
-    public override Task<PipelineContext<IEnumerable<string>>> ReceiveAsync()
+    public override Task<PipelineContext> ReceiveAsync(PipelineContext ctx)
     {
         var files = new List<string>();
-        foreach (var segment in _option.Segments)
+        foreach (var segment in Option.Segments)
         {
             var matcher = new Matcher();
             matcher.AddInclude(segment.Glob);
@@ -26,7 +21,7 @@ public class GlobbingReceiver : ReceiverBase<GlobbingOption, IEnumerable<string>
             files.AddRange(matchResult.Files.Select(match => Path.Combine(segment.BaseDir, match.Path)));
         }
         
-        var pipelineContext = new PipelineContext<IEnumerable<string>> { Data = files };
-        return Task.FromResult(pipelineContext);
+        ctx.CoverageFiles = files;
+        return Task.FromResult(ctx);
     }
 }

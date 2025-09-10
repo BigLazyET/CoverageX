@@ -2,27 +2,32 @@ using CoverageIncr.Shared;
 
 namespace CoverageIncr.Pipelines;
 
-/// <summary>
-/// 执行器
-/// </summary>
-public static class PipelineExecutor
+public class PipelineExecutor : IPipelineExecutor
 {
-    public static async Task ExecuteAsync(string pipelineName, IEnumerable<Func<IPipelineStep>> steps)
+    private readonly IPipelineFactory _pipelineFactory;
+
+    public PipelineExecutor(IPipelineFactory pipelineFactory)
     {
-        try
+        _pipelineFactory = pipelineFactory;
+    }
+
+    public async Task Run()
+    {
+        // var pipelines = AppDomain.CurrentDomain.GetAssemblies()
+        var pipelines = _pipelineFactory.GetPipelines();
+        foreach (var pipeline in pipelines)
         {
-            object ctx = null;
-            foreach (var stepFunc in steps)
-            {
-                var step = stepFunc();
-                await step.StartAsync();
-                ctx = await step.ExecuteAsync(ctx);
-                await step.StopAsync();
-            }
-        }
-        finally
-        {
+            Console.WriteLine($"pipeline {pipeline.Key} start run");
+
+            var pipelineSteps = pipeline.Value;
             
+            PipelineContext context = null;
+            foreach (var pipelineStep in pipelineSteps)
+            {
+                await pipelineStep.StartAsync();
+                context = await pipelineStep.ExecuteAsync(context);
+                await pipelineStep.StopAsync();
+            }
         }
     }
 }

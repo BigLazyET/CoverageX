@@ -1,14 +1,6 @@
-namespace CoverageIncr.Shared.Pipelines;
+namespace CoverageIncr.Processors.Options;
 
-public class PipelineScope
-{
-    public PipelineConfig Config { get; set; }
-    public string Receiver { get; set; }
-    public List<string> Processors { get; set; } = new();
-    public string Exporter { get; set; }
-}
-
-public class PipelineConfig
+public class GitCloneProcOption
 {
     /// <summary>
     /// 项目地址
@@ -46,10 +38,4 @@ public class PipelineConfig
     /// 密码
     /// </summary>
     public required string Password { get; set; }
-    
-    /// <summary>
-    /// 基准分支
-    /// 用于与FeatureBranch进行比较计算增量的基准分支
-    /// </summary>
-    public required string BaseBranch { get; set; }
 }

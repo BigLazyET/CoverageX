@@ -2,16 +2,11 @@ using CoverageIncr.Shared;
 
 namespace CoverageIncr.Receivers;
 
-public abstract class ReceiverBase<TIn, TOut> : IReceiver<TOut>
+public abstract class ReceiverBase<TOption>(TOption option) : IReceiver
 {
-    protected TIn _option;
+    protected TOption Option = option;
 
-    public ReceiverBase(TIn option)
-    {
-        _option = option;
-    }
-
-    public abstract Task<PipelineContext<TOut>> ReceiveAsync();
+    public abstract Task<PipelineContext> ReceiveAsync(PipelineContext ctx);
 
     public Task StartAsync() => Task.CompletedTask;
 

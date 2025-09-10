@@ -2,19 +2,15 @@ using CoverageIncr.Shared;
 
 namespace CoverageIncr.Receivers;
 
-public class ReceiverStep<TOut> : IPipelineStep
+public class ReceiverStep(IReceiver receiver) : IPipelineStep
 {
-    private readonly IReceiver<TOut> _receiver;
+    public Task StartAsync() => receiver.StartAsync();
 
-    public ReceiverStep(IReceiver<TOut> receiver) => _receiver = receiver;
-    
-    public Task StartAsync() => _receiver.StartAsync();
+    public Task StopAsync() => receiver.StopAsync();
 
-    public Task StopAsync() => _receiver.StopAsync();
-
-    public async Task<object> ExecuteAsync(object ctx)
+    public async Task<PipelineContext> ExecuteAsync(PipelineContext ctx)
     {
-        await _receiver.ReceiveAsync();
-        return null;
+        var result = await receiver.ReceiveAsync(ctx);
+        return result;
     }
 }

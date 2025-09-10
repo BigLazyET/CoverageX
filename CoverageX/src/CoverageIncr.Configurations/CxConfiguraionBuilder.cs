@@ -7,8 +7,6 @@ public class CxConfiguraionBuilder : ICxConfigurationBuilder
 {
     public IList<ICxConfigurationSource> Sources { get; }
 
-    public CxConfigurationRoot Configuration { get; }
-
     public ICxConfigurationBuilder Add(ICxConfigurationSource source)
     {
         Sources.Add(source);

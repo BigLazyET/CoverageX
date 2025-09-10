@@ -1,19 +1,14 @@
-using CoverageIncr.Receivers.Options;
 using CoverageIncr.Shared;
 using CoverageIncr.Shared.Attributes;
 
 namespace CoverageIncr.Receivers;
 
-[Receiver(Name = "file", OptionType = typeof(string), OutType = typeof(IEnumerable<string>))]
-public class FileReceiver : ReceiverBase<string, IEnumerable<string>>
+[Receiver(Name = "file", OptionType = typeof(string))]
+public class FileReceiver(string option) : ReceiverBase<string>(option)
 {
-    public FileReceiver(string option) : base(option)
+    public override Task<PipelineContext> ReceiveAsync(PipelineContext ctx)
     {
-    }
-
-    public override Task<PipelineContext<IEnumerable<string>>> ReceiveAsync()
-    {
-        var pipelineContext = new PipelineContext<IEnumerable<string>> { Data = _option.Split(';') };
-        return Task.FromResult(pipelineContext);
+        ctx.CoverageFiles = Option.Split(';');
+        return Task.FromResult(ctx);
     }
 }

@@ -7,5 +7,5 @@ public class ReceiverAttribute : Attribute
     
     public Type OptionType { get; set; }
     
-    public Type OutType { get; set; }
+    public Type InType { get; set; }
 }
