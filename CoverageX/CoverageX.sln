@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoverageIncr.ConsoleApp", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoverageIncr.Configurations", "src\CoverageIncr.Configurations\CoverageIncr.Configurations.csproj", "{4F032DDF-3E36-4B96-97B2-8888E4D23AA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoverageIncr.Prasers", "src\CoverageIncr.Prasers\CoverageIncr.Prasers.csproj", "{9A2D905C-6073-4DAC-B286-E49CE6B44AD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,7 @@ Global
 		{5C705564-5D11-49AB-8BB3-A16EA8119983} = {5E58ED1B-166F-4057-BA54-A27EF37C5EB9}
 		{A3A36177-0578-4E4B-A6AC-C2EAD297C6C3} = {5E58ED1B-166F-4057-BA54-A27EF37C5EB9}
 		{4F032DDF-3E36-4B96-97B2-8888E4D23AA9} = {5E58ED1B-166F-4057-BA54-A27EF37C5EB9}
+		{9A2D905C-6073-4DAC-B286-E49CE6B44AD2} = {5E58ED1B-166F-4057-BA54-A27EF37C5EB9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D6D8F365-5EF5-4A39-89BC-0233C35D02DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -66,5 +69,9 @@ Global
 		{4F032DDF-3E36-4B96-97B2-8888E4D23AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F032DDF-3E36-4B96-97B2-8888E4D23AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F032DDF-3E36-4B96-97B2-8888E4D23AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A2D905C-6073-4DAC-B286-E49CE6B44AD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A2D905C-6073-4DAC-B286-E49CE6B44AD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A2D905C-6073-4DAC-B286-E49CE6B44AD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A2D905C-6073-4DAC-B286-E49CE6B44AD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

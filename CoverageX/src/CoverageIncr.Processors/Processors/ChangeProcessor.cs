@@ -13,7 +13,6 @@ public class ChangeProcessor(string option, IMethodChangeService methodChangeSer
 
         foreach (var patchChange in ctx.PatchChanges)
         {
-            var coveragePath = Path.Combine(ctx.Config.FeaturePath, patchChange.Path);
             var deployFilePath = Path.Combine(ctx.Config.DeployPath, patchChange.Path);
             
             var linePatches = patchChange.AddedLines

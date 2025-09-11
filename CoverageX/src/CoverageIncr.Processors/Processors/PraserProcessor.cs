@@ -9,6 +9,7 @@ public class PraserProcessor(PraserProcessorOption option) : ProcessorBase<Prase
 {
     public override Task<PipelineContext> ProcessAsync(PipelineContext ctx)
     {
+        var coverageFiles = ctx.CoverageFiles;
         return Task.FromResult(ctx);
     }
 }
