@@ -1,13 +1,14 @@
 using System.Xml;
 using System.Xml.Linq;
+using CoverageIncr.Shared;
 
 namespace CoverageIncr.Prasers;
 
-public abstract class PraserBase: ICoverageParser, ICoveragePraserPreProcessor
+public abstract class PraserBase: ICoverageParser
 {
     public abstract CoverageFormat Format { get; }
 
-    public abstract IEnumerable<ParserResult> Parse(string filePath);
+    public abstract IEnumerable<ParserResult> Parse(string filePath, IList<ReportGeneratorFilter> filters);
     
     /// <summary>
     /// Load elements in memory balanced manner.
@@ -32,10 +33,5 @@ public abstract class PraserBase: ICoverageParser, ICoveragePraserPreProcessor
                 }
             }
         }
-    }
-
-    public virtual Task PreProcess(XElement element)
-    {
-        return Task.CompletedTask;
     }
 }

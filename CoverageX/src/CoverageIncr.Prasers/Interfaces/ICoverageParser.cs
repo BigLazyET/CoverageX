@@ -1,3 +1,5 @@
+using CoverageIncr.Shared;
+
 namespace CoverageIncr.Prasers;
 
 /// <summary>
@@ -6,5 +8,5 @@ namespace CoverageIncr.Prasers;
 public interface ICoverageParser
 {
     CoverageFormat Format { get; }
-    IEnumerable<ParserResult> Parse(string filePath);
+    IEnumerable<ParserResult> Parse(string filePath, IList<ReportGeneratorFilter> filters);
 }

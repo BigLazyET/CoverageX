@@ -12,11 +12,15 @@ public class PipelineContext
     
     // 中间结果
     public Dictionary<string, IList<int>> ChangeLines { get; set; } = [];
-    public List<ReportGeneratorFilter> Filters { get; set; } = [];
     public IEnumerable<PatchEntryChanges> PatchChanges { get; set; }
     public Commit BaseCommit { get; set; }
     public Commit FeatureCommit { get; set; }
     public IEnumerable<string> CoverageFiles { get; set; }
+    
+    // 中间结果-filters
+    public List<ReportGeneratorFilter> Filters { get; set; } = [];
+    
+    public IFilter AssemblyFilters { get; set; }
 }
 
 public class ReportGeneratorFilter

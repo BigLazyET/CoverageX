@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using CoverageIncr.Shared;
 
 namespace CoverageIncr.Prasers;
 
@@ -44,17 +45,20 @@ public class CoverageProcessDirector
         }
     }
 
-    public async Task<List<ParserResult>> ProcessAllAsync(IEnumerable<string> filePaths)
+    public async Task<List<ParserResult>> ProcessAllAsync(PipelineContext context)
     {
-        var tasks = filePaths.Select(filePath => Task.Run(() =>
+        var results = new List<ParserResult>();
+        var tasks = context.CoverageFiles.Select(filePath => Task.Run(() =>
         {
             var detectedFormat = DetectFormat(filePath);
             if (!_parserCache.TryGetValue(detectedFormat, out var parser))
                 throw new NotSupportedException($"No parser found for {detectedFormat}");
-            return parser.Parse(filePath);
+            results.AddRange(parser.Parse(filePath));
         }));
 
-        return (await Task.WhenAll(tasks));
+        await Task.WhenAll(tasks);
+
+        return results;
     }
 
     private CoverageFormat DetectFormat(string filePath)

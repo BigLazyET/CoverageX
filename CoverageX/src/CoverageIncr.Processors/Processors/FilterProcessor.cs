@@ -1,9 +1,10 @@
+using CoverageIncr.Processors.Options;
 using CoverageIncr.Shared;
 using LibGit2Sharp;
 
 namespace CoverageIncr.Processors.Processors;
 
-public class FilterProcessor(string option, IMethodChangeService methodChangeService) : ProcessorBase<string>(option)
+public class FilterProcessor(FilterOption option, IMethodChangeService methodChangeService) : ProcessorBase<FilterOption>(option)
 {
     public override Task<PipelineContext> ProcessAsync(PipelineContext ctx)
     {
